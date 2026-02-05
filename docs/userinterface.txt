@@ -6,9 +6,9 @@ The following are example outputs:
 
 java TopSecret
 The following are available files and their indexes:
-0 - texta.txt
-1 - textb.txt
-2 - textc.txt
+00 texta.txt
+01 textb.txt
+02 textc.txt
 
 java TopSecret 1
 Reading textb with cipher key of zero:
