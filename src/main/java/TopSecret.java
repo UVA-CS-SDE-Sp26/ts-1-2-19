@@ -1,4 +1,6 @@
-//did part of #3, trying to get gradle to work before I work on the final half. 
+// to run, cd into the src/main/java folder, then run
+//javac TopSecret.java
+//java TopSecret.java
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -17,13 +19,15 @@ public class TopSecret {
         List<String> files = new ArrayList<>();      //create list of files.
         Path dataPath = Paths.get(System.getProperty("user.dir")).resolve("../../..").resolve("data").normalize();
         //path to the files; I created a new folder under TopSecret with random files a.txt and b.txt
+        //this code makes it so that anyone with a folder called data can use this method regardless of absolute or relative paths.
 
         if (args.length == 0) { //if arguments = 0
-            int counter = 0;
+            int counter = 0; //used for the counter next to file name
             // using try catch for stuff involving file systems.
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(dataPath)) { //opens the system for files
                 for (Path aFile : stream) {  //for every file in the stream
                     files.add(aFile.getFileName().toString()); //converts the filename to string and adds it into the prepared arraylist
+                    //counter logistics
                     if (counter < 10) {
                         System.out.println("0" + counter + " " + aFile.getFileName());
                         counter++;
@@ -31,12 +35,11 @@ public class TopSecret {
                         System.out.println(counter + " " + aFile.getFileName());
                         counter++;
                     }
-
                 }
                 //if the system has issues finding the file or folder:
             } catch (IOException e) { //stream is automatically closed by now.
                 System.out.println("Some error in accessing files.");
-                e.printStackTrace();
+                e.printStackTrace(); //this code identifies why the error happened
             }
         }
     }
