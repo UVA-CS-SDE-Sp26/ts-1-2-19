@@ -15,7 +15,8 @@ public class TopSecret {
     public static void accessFiles(String[] args) {         //this method attempts to access files from the data folder
 
         List<String> files = new ArrayList<>();      //create list of files.
-        Path dataPath = Paths.get("data");      //path to the files; I created a new folder under TopSecret with random files a.txt and b.txt
+        Path dataPath = Paths.get(System.getProperty("user.dir")).resolve("../../..").resolve("data").normalize();
+        //path to the files; I created a new folder under TopSecret with random files a.txt and b.txt
 
         if (args.length == 0) { //if arguments = 0
             int counter = 0;
@@ -35,6 +36,7 @@ public class TopSecret {
                 //if the system has issues finding the file or folder:
             } catch (IOException e) { //stream is automatically closed by now.
                 System.out.println("Some error in accessing files.");
+                e.printStackTrace();
             }
         }
     }
