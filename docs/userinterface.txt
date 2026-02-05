@@ -1,0 +1,19 @@
+Documentation for the CMD UI
+
+Run the file with the command "java TopSecret", with up to two arguments (int index, int cipherKey)
+
+The following are example outputs:
+
+java TopSecret
+The following are available files and their indexes:
+0 - texta.txt
+1 - textb.txt
+2 - textc.txt
+
+java TopSecret 1
+File Output:
+The quick brown fox jumps over the lazy dog.
+
+java TopSecret 1 1
+File Output:
+Uif rvjdl cspxo gpy kvnqt pwfs uif mbaz eph.
