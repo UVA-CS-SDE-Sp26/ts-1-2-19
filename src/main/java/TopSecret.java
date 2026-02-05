@@ -15,11 +15,13 @@ public class TopSecret {
     public static void accessFiles(String[] args) {         //this method attempts to access files from the data folder
 
         List<String> files = new ArrayList<>();      //create list of files.
-        Path dataPath = Paths.get("./data").normalize();
-        System.out.println("dataPath: " + dataPath);
+        Path dataPath = Paths.get("./docs").normalize();
+        //Path dataPath = Paths.get(System.getProperty("user.dir")).resolve("../../..").resolve("data").normalize();
+        // System.out.println("dataPath: " + dataPath);
         //path to the files; I created a new folder under TopSecret with random files a.txt and b.txt
 
         if (args.length == 0) { //if arguments = 0
+            System.out.println("The following are available files and their indexes:");
             int counter = 0;
             // using try catch for stuff involving file systems.
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(dataPath)) { //opens the system for files
