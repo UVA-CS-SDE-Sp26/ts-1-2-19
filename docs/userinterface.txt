@@ -11,9 +11,9 @@ The following are available files and their indexes:
 2 - textc.txt
 
 java TopSecret 1
-File Output:
+Reading textb with cipher key of zero:
 The quick brown fox jumps over the lazy dog.
 
 java TopSecret 1 1
-File Output:
+Reading textb with cipher key of one:
 Uif rvjdl cspxo gpy kvnqt pwfs uif mbaz eph.
