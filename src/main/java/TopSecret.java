@@ -7,6 +7,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * Commmand Line Utility
@@ -44,6 +47,23 @@ public class TopSecret {
                 e.printStackTrace(); //this code identifies why the error happened
             }
         }
+    }
+
+    public String returnFileContents(String filename) {
+        String fileContents = "";
+        File currentFile = new File("data/"+filename); //files are located a folder called 'data'
+        try(Scanner scanner = new Scanner(currentFile)) {
+            while (scanner.hasNextLine()) { //reads the file contents line by line
+                String line = scanner.nextLine();
+                fileContents += (line + "\n"); //concatenates the file contents to a string
+            }
+            return fileContents;
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("An error occurred while trying to access " + filename + ".");
+            e.printStackTrace();
+        }
+        return "";
     }
 
     public static void main(String[] args) {

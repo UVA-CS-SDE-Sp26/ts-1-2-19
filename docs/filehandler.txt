@@ -1,0 +1,8 @@
+Documentation for the File Handler
+
+This program will receive requests to read files. Once a request is received, the program will read the file and return the file contents.
+If the file cannot be accessed, an error will be printed and the function will return the empty string.
+
+TopSecret
+-----------
++returnFileContents(String filename): String
