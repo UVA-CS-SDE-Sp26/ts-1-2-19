@@ -42,4 +42,18 @@ public class UITest {
             i++;
         }
     }
+
+    @Test
+    public void oneArgTest() {
+        String[] args = new String[1];
+        args[0] = "1";
+        TopSecret.main(args);
+        System.out.flush();
+
+        sc = new Scanner(outContent.toString());
+    }
+    @Test
+    public void twoArgTest() {
+
+    }
 }
