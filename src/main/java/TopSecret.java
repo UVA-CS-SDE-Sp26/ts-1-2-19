@@ -23,7 +23,7 @@ public class TopSecret {
         // System.out.println("dataPath: " + dataPath);
         //path to the files; I created a new folder under TopSecret with random files a.txt and b.txt
         //this code makes it so that anyone with a folder called data can use this method regardless of absolute or relative paths.
-
+        int cipherKey = 0; // default key
         if (args.length == 0) { //if arguments = 0
             System.out.println("The following are available files and their indexes:");
             int counter = 0; //used for the counter next to file name
@@ -46,7 +46,17 @@ public class TopSecret {
                 System.out.println("Some error in accessing files.");
                 e.printStackTrace(); //this code identifies why the error happened
             }
+            return;
+        } else if(args.length == 2) {
+            cipherKey = Integer.parseInt(args[1]);
         }
+        // Insert code for handling file opening
+        System.out.println("Reading " + " placeholderName "/*replace with filename*/ + " with cipherKey of " + cipherKey +":");
+
+        // Shift file contents (if cipherKey == 0) return the same string
+
+        // Print shifted contents
+        System.out.println("placeholder" /*replace with shifted file contents*/);
     }
 
     public String returnFileContents(String filename) {
