@@ -2,11 +2,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class fileHandler {
+public class FileHandler {
     private String fileName;
     private String fileContents;
 
-    public fileHandler(String fn) {
+    public FileHandler(String fn) {
         fileName = fn;
     }
 
