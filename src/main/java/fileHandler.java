@@ -10,6 +10,18 @@ public class fileHandler {
         fileName = fn;
     }
 
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileContents() {
+        return fileContents;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
     public String returnFileContents() {
         String fc = "";
         File currentFile = new File("data/"+fileName); //files are located a folder called 'data'
