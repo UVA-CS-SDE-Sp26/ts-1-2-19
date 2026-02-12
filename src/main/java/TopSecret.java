@@ -18,9 +18,7 @@ public class TopSecret {
     public static void accessFiles(String[] args) {         //this method attempts to access files from the data folder
 
         List<String> files = new ArrayList<>();      //create list of files.
-        Path dataPath = Paths.get("./docs").normalize();
-        //Path dataPath = Paths.get(System.getProperty("user.dir")).resolve("../../..").resolve("data").normalize();
-        // System.out.println("dataPath: " + dataPath);
+        Path dataPath = Paths.get("./data").normalize();
         //path to the files; I created a new folder under TopSecret with random files a.txt and b.txt
         //this code makes it so that anyone with a folder called data can use this method regardless of absolute or relative paths.
         int cipherKey = 0; // default key
@@ -47,7 +45,37 @@ public class TopSecret {
                 e.printStackTrace(); //this code identifies why the error happened
             }
             return;
-        } else if(args.length == 2) {
+        }
+        ///////////
+        else if (args.length == 1) {
+            if (!args[0].matches("0[0-9]|[1-9][0-9]|100")) {
+                System.out.println("This algorithm only takes numbers 00-100.");
+                return;
+            }
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(dataPath)) { //copy paste from above
+                for (Path aFile : stream) {  //for every file in the stream
+                    files.add(aFile.getFileName().toString());
+                }
+            } catch (IOException e) {
+                System.out.println("Some error in accessing files.");
+                return;
+            }
+
+            //At some point, the folders went out of alphabetical order, for ease of testing, I am sorting them now.
+            files.sort(String::compareTo);
+            //assigns an int to each file in the folder based on the argument in position one, which is the number
+            int index = Integer.parseInt(args[0]);
+            try {
+                String filename = files.get(index);
+                System.out.println(returnFileContents(filename));
+                return;
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Error: Index does not match an existing file. Try a different number.");
+                return;
+            }
+        }
+        //////////
+        else if(args.length == 2) {
             cipherKey = Integer.parseInt(args[1]);
         }
         // Insert code for handling file opening
@@ -59,7 +87,7 @@ public class TopSecret {
         System.out.println("placeholder" /*replace with shifted file contents*/);
     }
 
-    public String returnFileContents(String filename) {
+    public static String returnFileContents(String filename) {
         String fileContents = "";
         File currentFile = new File("data/"+filename); //files are located a folder called 'data'
         try(Scanner scanner = new Scanner(currentFile)) {
