@@ -48,11 +48,13 @@ public class TopSecret {
         }
         ///////////
         else if (args.length == 1) {
+            //this returns after user puts in an invalid number that I arbitrarily confined at 100.
             if (!args[0].matches("0[0-9]|[1-9][0-9]|100")) {
                 System.out.println("This algorithm only takes numbers 00-100.");
                 return;
             }
-            try (DirectoryStream<Path> stream = Files.newDirectoryStream(dataPath)) { //copy paste from above
+            //This is copy-paste from above and basically just connects the data folder to this code
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(dataPath)) {
                 for (Path aFile : stream) {  //for every file in the stream
                     files.add(aFile.getFileName().toString());
                 }
@@ -63,8 +65,9 @@ public class TopSecret {
 
             //At some point, the folders went out of alphabetical order, for ease of testing, I am sorting them now.
             files.sort(String::compareTo);
-            //assigns an int to each file in the folder based on the argument in position one, which is the number
+            //assigns an int to each file in the folder based on the argument in position one, which is the number assigned to file.
             int index = Integer.parseInt(args[0]);
+            //catch an exception when the number given by user does not match a file. Otherwise, call returnFileContents
             try {
                 String filename = files.get(index);
                 System.out.println(returnFileContents(filename));
