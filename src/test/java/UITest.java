@@ -51,6 +51,7 @@ public class UITest {
         System.out.flush();
 
         sc = new Scanner(outContent.toString());
+
     }
     @Test
     public void twoArgTest() {
