@@ -1,0 +1,48 @@
+Document the plan your team makes for testing in programcontrol.txt.
+
+Testing TopSecret can be split into 4 major components
+    1. Testing number of arguments (0, 1, 2)
+    2. Testing if correct file outputs correct content
+    3. Testing cipher
+    4. Testing for catching errors for graceful exit
+
+Case 1) No Arguments: Should list all the text files inside the "data" folder.
+    Test inputs:
+        1) java TopSecret
+    Test outputs:
+        - Number assigned and filenames of all the text files inside data folder.
+
+Case 2) 1 Argument: Should output contents of specified file name.
+    Test inputs:
+        1) java TopSecret 00
+        2) java TopSecret 01
+        3) java TopSecret 02
+        4) jave TopSecret 10
+    Test outputs:
+        - The contents of each respective file. The files are ranked alphabetically \
+        and numerically so the index/number assigned corresponds to position in the folder.
+Case 2a) 1 Argument -- index not within 00-100/is not a number: Should throw an error
+    Test inputs:
+        1) java TopSecret 100
+        2) java TopSecret 101
+        3) java TopSecret ab
+        4) java TopSecret 00a
+        5) java TopSecret 0
+        6) java TopSecret -1
+    Test outputs:
+        - The result of 1) should depend on whether there is a file indexed to 100. In our case, we do not have an 100\
+        file, so the expected result should be an error saying "index does not match existing file". This is used to ensure\
+        the threshold between 100/101 is working.
+        - The result of 2), 3), 4), 5), 6) should be an error message saying "this alg only takes 00-100"
+Case 2b) 1 Argument -- index does not match a file: Should throw an error
+    Test inputs:
+        1) java TopSecret 10
+        2) java TopSecret 11 //our data folder only goes up to index 10
+        3) java TopSecret 50
+    Test outputs:
+        - 1) should return the contents of file indexed to 10. This is used to ensure the threshold between\
+        matching to a file/not matching to a file is working correctly.
+        - 2), 3) should throw an error saying "index does not match existing file"
+
+Case 3) 2 Arguments: checks if cipher is working correctly
+//... insert cipher logic here when done.

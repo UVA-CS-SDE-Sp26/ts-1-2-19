@@ -15,8 +15,8 @@ import java.util.Scanner;
  * Commmand Line Utility
  */
 public class TopSecret {
-    public static void accessFiles(String[] args) {         //this method attempts to access files from the data folder
-
+    //this method accesses files from the data folder, depending on number of arguments given.
+    public static void accessFiles(String[] args) {
         List<String> files = new ArrayList<>();      //create list of files.
         Path dataPath = Paths.get("./data").normalize();
         //path to the files; I created a new folder under TopSecret with random files a.txt and b.txt
