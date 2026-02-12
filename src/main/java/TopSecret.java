@@ -48,43 +48,52 @@ public class TopSecret {
             return;
         }
         ///////////
-        else if (args.length == 1) {
-            //this returns after user puts in an invalid number that I arbitrarily confined at 100.
-            if (!args[0].matches("0[0-9]|[1-9][0-9]|100")) {
-                System.out.println("This algorithm only takes numbers 00-100.");
-                return;
-            }
-            //This is copy-paste from above and basically just connects the data folder to this code
-            try (DirectoryStream<Path> stream = Files.newDirectoryStream(dataPath)) {
-                for (Path aFile : stream) {  //for every file in the stream
-                    files.add(aFile.getFileName().toString());
-                }
-            } catch (IOException e) {
-                System.out.println("Some error in accessing files.");
-                return;
-            }
-
-            //At some point, the folders went out of alphabetical order, for ease of testing, I am sorting them now.
-            files.sort(String::compareTo);
-            //assigns an int to each file in the folder based on the argument in position one, which is the number assigned to file.
-            int index = Integer.parseInt(args[0]);
-            //catch an exception when the number given by user does not match a file. Otherwise, call returnFileContents
-            try {
-                String filename = files.get(index);
-                System.out.println(returnFileContents(filename));
-                return;
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Error: Index does not match an existing file. Try a different number.");
-                return;
-            }
-        }
+//        else if (args.length == 1) {
+//            //this returns after user puts in an invalid number that I arbitrarily confined at 100.
+//            if (!args[0].matches("0[0-9]|[1-9][0-9]|100")) {
+//                System.out.println("This algorithm only takes numbers 00-100.");
+//                return;
+//            }
+//            //This is copy-paste from above and basically just connects the data folder to this code
+//            try (DirectoryStream<Path> stream = Files.newDirectoryStream(dataPath)) {
+//                for (Path aFile : stream) {  //for every file in the stream
+//                    files.add(aFile.getFileName().toString());
+//                }
+//            } catch (IOException e) {
+//                System.out.println("Some error in accessing files.");
+//                return;
+//            }
+//
+//            //At some point, the folders went out of alphabetical order, for ease of testing, I am sorting them now.
+//            files.sort(String::compareTo);
+//            //assigns an int to each file in the folder based on the argument in position one, which is the number assigned to file.
+//            int index = Integer.parseInt(args[0]);
+//            //catch an exception when the number given by user does not match a file. Otherwise, call returnFileContents
+//            try {
+//                String filename = files.get(index);
+//                System.out.println(returnFileContents(filename));
+//                return;
+//            } catch (IndexOutOfBoundsException e) {
+//                System.out.println("Error: Index does not match an existing file. Try a different number.");
+//                return;
+//            }
+//        }
         //////////
         else if(args.length == 2) {
             cipherKey = Integer.parseInt(args[1]);
         }
         // Insert code for handling file opening
         System.out.println("Reading " + " placeholderName "/*replace with filename*/ + " with cipherKey of " + cipherKey +":");
-
+        int index = Integer.parseInt(args[0]);
+        String filename;
+        //catch an exception when the number given by user does not match a file. Otherwise, call returnFileContents
+        try {
+        filename = files.get(index);
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("Error: Index does not match an existing file. Try a different number.");
+            return;
+        }
         // Shift file contents (if cipherKey == 0) return the same string
 
         // Print shifted contents
@@ -96,9 +105,6 @@ public class TopSecret {
         String actualLine = "";
         String cipherLine = "";
         try (Scanner scanner = new Scanner(keyfile)) {
-            if (!scanner.hasNextLine()) {
-                throw new IllegalArgumentException("Cipher key missing first line.");
-            }
             actualLine = scanner.nextLine();
             if (!scanner.hasNextLine()) {
                 throw new IllegalArgumentException("Cipher key missing second line.");
