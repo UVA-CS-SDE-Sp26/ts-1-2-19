@@ -91,23 +91,6 @@ public class TopSecret {
         System.out.println("placeholder" /*replace with shifted file contents*/);
     }
 
-    public static String returnFileContents(String filename) {
-        String fileContents = "";
-        File currentFile = new File("data/"+filename); //files are located a folder called 'data'
-        try(Scanner scanner = new Scanner(currentFile)) {
-            while (scanner.hasNextLine()) { //reads the file contents line by line
-                String line = scanner.nextLine();
-                fileContents += (line + "\n"); //concatenates the file contents to a string
-            }
-            return fileContents;
-        }
-        catch (FileNotFoundException e) {
-            System.out.println("An error occurred while trying to access " + filename + ".");
-            e.printStackTrace();
-        }
-        return "";
-    }
-
     public String decipher(String text) {
         File keyfile = new File("ciphers/key.txt");
         String actualLine = "";
