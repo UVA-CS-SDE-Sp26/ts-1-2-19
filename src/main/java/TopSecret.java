@@ -16,12 +16,14 @@ import java.util.Scanner;
  * Commmand Line Utility
  */
 public class TopSecret {
+
     //this method accesses files from the data folder, depending on number of arguments given.
     public static void accessFiles(String[] args) {
         List<String> files = new ArrayList<>();      //create list of files.
         Path dataPath = Paths.get("./data").normalize();
         //path to the files; I created a new folder under TopSecret with random files a.txt and b.txt
         //this code makes it so that anyone with a folder called data can use this method regardless of absolute or relative paths.
+
         int cipherKey = 0; // default key
         if (args.length == 0) { //if arguments = 0
             System.out.println("The following are available files and their indexes:");
@@ -47,13 +49,59 @@ public class TopSecret {
             }
             return;
         }
+        ////////
+        else if (args.length == 1) {
+            if (!args[0].matches("0[0-9]|[1-9][0-9]|100")) {
+                System.out.println("This algorithm only takes numbers 00-100.");
+                return;
+            }
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(dataPath)) { //copy paste from above
+                for (Path aFile : stream) {  //for every file in the stream
+                    files.add(aFile.getFileName().toString());
+                }
+            } catch (IOException e) {
+                System.out.println("Some error in accessing files.");
+                return;
+            }
+            //At some point, the folders went out of alphabetical order, for ease of testing, I am sorting them now.
+            files.sort(String::compareTo);
+            //assigns an int to each file in the folder based on the argument in position one, which is the number
+            int index = Integer.parseInt(args[0]);
+            try {
+                String fileName = files.get(index);
+                FileHandler handler = new FileHandler(fileName);
+                String contents = handler.returnFileContents();
+                System.out.println("Reading " + fileName + " with cipherKey of " + cipherKey +":");
+                System.out.println(contents);
+                return;
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Error: Index does not match an existing file. Try a different number.");
+                return;
+            }
+        }
+        ////////
         else if(args.length == 2) {
             cipherKey = Integer.parseInt(args[1]);
+
+
         }
+        if (!args[0].matches("0[0-9]|[1-9][0-9]|100")) {
+            System.out.println("This algorithm only takes numbers 00-100.");
+            return;
+        }
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dataPath)) { //copy paste from above
+            for (Path aFile : stream) {  //for every file in the stream
+                files.add(aFile.getFileName().toString());
+            }
+        } catch (IOException e) {
+            System.out.println("Some error in accessing files.");
+            return;
+        }
+
 
         // Get fileName using index passed through args
         int index = Integer.parseInt(args[0]);
-        String fileName;
+        String fileName = files.get(index);
         // catch an exception when the number given by user does not match a file, else get the fileName
         try {
             fileName = files.get(index);
@@ -62,12 +110,17 @@ public class TopSecret {
             System.out.println("Error: Index does not match an existing file. Try a different number.");
             return;
         }
-        // Insert code for handling file opening
+
+        FileHandler handler = new FileHandler(fileName);
+        String contents = handler.returnFileContents();
+
+
+        //Insert code for handling file opening
         System.out.println("Reading " + fileName + " with cipherKey of " + cipherKey +":");
         // Shift file contents (if cipherKey == 0) return the same string
 
         // Print shifted contents
-        System.out.println("placeholder" /*replace with shifted file contents*/);
+        System.out.println(contents /*replace with shifted file contents*/);
     }
 
     public String decipher(String text) {
