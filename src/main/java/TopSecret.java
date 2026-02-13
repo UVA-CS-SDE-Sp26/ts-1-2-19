@@ -81,47 +81,42 @@ public class TopSecret {
         }
         ////////
         else if(args.length == 2) {
+            int index;
             cipherKey = Integer.parseInt(args[1]);
-
-
-        }
-        if (!args[0].matches("0[0-9]|[1-9][0-9]|100")) {
-            System.out.println("This algorithm only takes numbers 00-100.");
-            return;
-        }
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dataPath)) { //copy paste from above
-            for (Path aFile : stream) {  //for every file in the stream
-                files.add(aFile.getFileName().toString());
+            try {
+                index = Integer.parseInt(args[0]);
+                cipherKey = Integer.parseInt(args[1]);
+            } catch (NumberFormatException e) {
+                System.out.println("The second argument must be an integer.");
+                return;
             }
-        } catch (IOException e) {
-            System.out.println("Some error in accessing files.");
-            return;
+            //load files
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(dataPath)) { //copy paste from above
+                for (Path aFile : stream) {  //for every file in the stream
+                    files.add(aFile.getFileName().toString());
+                }
+            } catch (IOException e) {
+                System.out.println("Some error in accessing files.");
+                return;
+            }
+            String fileName = files.get(index);
+            FileHandler handler = new FileHandler(fileName);
+            String contents = handler.returnFileContents();
+
+            //Insert code for handling file opening
+            System.out.println("Reading " + fileName + " with cipherKey of " + cipherKey +":");
+            // Shift file contents (if cipherKey == 0) return the same string
+            if (cipherKey != 0) {
+                TopSecret ts = new TopSecret();
+                contents = ts.decipher(contents);
+            }
+            // Print shifted contents
+            System.out.println(contents /*replace with shifted file contents*/);
+        }
+
         }
 
 
-        // Get fileName using index passed through args
-        int index = Integer.parseInt(args[0]);
-        String fileName = files.get(index);
-        // catch an exception when the number given by user does not match a file, else get the fileName
-        try {
-            fileName = files.get(index);
-        }
-        catch (IndexOutOfBoundsException e) {
-            System.out.println("Error: Index does not match an existing file. Try a different number.");
-            return;
-        }
-
-        FileHandler handler = new FileHandler(fileName);
-        String contents = handler.returnFileContents();
-
-
-        //Insert code for handling file opening
-        System.out.println("Reading " + fileName + " with cipherKey of " + cipherKey +":");
-        // Shift file contents (if cipherKey == 0) return the same string
-
-        // Print shifted contents
-        System.out.println(contents /*replace with shifted file contents*/);
-    }
 
     public String decipher(String text) {
         File keyfile = new File("ciphers/key.txt");
