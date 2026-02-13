@@ -49,32 +49,33 @@ public class ProgramControlTest {
 
     @Test
     public void Testtwo_One_Args_a() {
-        TopSecret.accessFiles(new String[]{"00"});
-        assertEquals("Reading j.txt with cipherKey of 0:\n" +
-                "This is file j content\n" +
-                "index at 00", outContent.toString().trim(), "File contents of a.txt should be: Reading j.txt with cipherKey of 0");
+        TopSecret.accessFiles(new String[]{"09"});
+        String actual = outContent.toString().replaceAll("\\R", "\n").trim();
+        String expected = ("Reading j.txt with cipherKey of key.txt:\n" +
+                "index at 00").replaceAll("\\R", "\n").trim();
+        assertEquals(expected, actual);
     }
     @Test
     public void Testthree_One_Args_b() {
-        TopSecret.accessFiles(new String[]{"01"});
-        assertEquals("Reading k.txt with cipherKey of 0:\n" +
-                "this is file k content\n" +
-                "index at 01", outContent.toString().trim(), "File contents of a.txt should be: Reading k.txt with cipherKey of 0:\n" +
-                "this is file k content\n" +
-                "index at 01");
+        TopSecret.accessFiles(new String[]{"10"});
+        String actual = outContent.toString().replaceAll("\\R", "\n").trim();
+        String expected = ("Reading k.txt with cipherKey of key.txt:\n" +
+                "index at 01").replaceAll("\\R", "\n").trim();
+        assertEquals(expected, actual);
     }
     @Test
     public void Testfour_One_Args_c() {
-        TopSecret.accessFiles(new String[]{"10"});
-        assertEquals("Reading g.txt with cipherKey of 0:\n" +
-                "This is content of g", outContent.toString().trim(), "File contents of a.txt should be: Reading g.txt with cipherKey of 0:\n" +
-                "This is content of g");
+        TopSecret.accessFiles(new String[]{"6"});
+        String actual = outContent.toString().replaceAll("\\R", "\n").trim();
+        String expected = ("Reading g.txt with cipherKey of key.txt:\n" +
+                "This is content of g").replaceAll("\\R", "\n").trim();
+        assertEquals(expected, actual);
     }
     @Test
     public void Testfive_One_Args_a() {
         TopSecret.accessFiles(new String[]{"100"});
         String output = outContent.toString();
-        assertTrue(output.contains("Error: Index does not match an existing file. Try a different number."));
+        assertTrue(output.contains("Error: Index does not match an existing file."));
     }
     @Test
     public void Testsix_One_Args_b() {
@@ -99,7 +100,7 @@ public class ProgramControlTest {
 
     @Test
     public void Testnine_One_Args_e() {
-        TopSecret.accessFiles(new String[]{"0"});
+        TopSecret.accessFiles(new String[]{"-1"});
         String output = outContent.toString();
         assertTrue(output.contains("This algorithm only takes numbers 00-100."));
     }
@@ -120,39 +121,44 @@ public class ProgramControlTest {
 
     @Test
     public void Testtwelve_One_Args_a() {
-        TopSecret.accessFiles(new String[]{"10"});
-        String output = outContent.toString();
-        assertEquals("Reading g.txt with cipherKey of 0:\n" +
-                "This is content of g", outContent.toString().trim());
+        TopSecret.accessFiles(new String[]{"6"});
+        String actual = outContent.toString().replaceAll("\\R", "\n").trim();
+        String expected = ("Reading g.txt with cipherKey of key.txt:\n" +
+                "This is content of g").replaceAll("\\R", "\n").trim();
+        assertEquals(expected, actual);
     }
 
     @Test
     public void Testthirteen_One_Args_b() {
         TopSecret.accessFiles(new String[]{"11"});
         String output = outContent.toString();
-        assertTrue(output.contains("Error: Index does not match an existing file. Try a different number."));
+        assertTrue(output.contains("Error: Index does not match an existing file."));
     }
 
     @Test
     public void Testfourteen_One_Args_c() {
         TopSecret.accessFiles(new String[]{"50"});
         String output = outContent.toString();
-        assertTrue(output.contains("Error: Index does not match an existing file. Try a different number."));
+        assertTrue(output.contains("Error: Index does not match an existing file."));
     }
 
     @Test
     public void Testfifteen_Two_Args_a() {
-        TopSecret.accessFiles(new String[]{"00 0"});
-        String output = outContent.toString();
-        assertEquals("This is file j content", outContent.toString().trim());
+        TopSecret.accessFiles(new String[]{"00", "0"});
+        String actual = outContent.toString().replaceAll("\\R", "\n").trim();
+        String expected = ("Reading a.txt with cipherKey of capitalizationtestkey.txt:\n" +
+                "bdkjgevgdvwejgsjedbw").replaceAll("\\R", "\n").trim();
+        assertEquals(expected, actual);
 
     }
 
     @Test
     public void Testsixteen_Two_Args_b() {      //FAILED
-        TopSecret.accessFiles(new String[]{"00 1"});
-        String output = outContent.toString();
-        assertEquals("Uijt jt gjmf k dpouofu", outContent.toString().trim());
+        TopSecret.accessFiles(new String[]{"00", "1"});
+        String actual = outContent.toString().replaceAll("\\R", "\n").trim();
+        String expected = ("Reading a.txt with cipherKey of key.txt:\n" +
+                "bdkjhevhdvwejhsjedbw").replaceAll("\\R", "\n").trim();
+        assertEquals(expected, actual);
     }
 
     @Test

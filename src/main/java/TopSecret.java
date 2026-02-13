@@ -78,7 +78,17 @@ public class TopSecret {
         // Create cipher with either the default key, or if second arg, set to new key
         cipher = new Cipher(cipherKey);
         // Get the filename based on the index passed through arg 1
-        int index = Integer.parseInt(args[0]);
+        int index;
+        try {
+            index = Integer.parseInt(args[0]);
+            if (index > 100 || index < 0) {
+                System.out.println("This algorithm only takes numbers 00-100.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("This algorithm only takes numbers 00-100.");
+            return;
+        }
         String fileName;
         try {
             fileName = files.get(index);
