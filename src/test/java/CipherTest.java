@@ -6,7 +6,7 @@ public class CipherTest {
     @Test
     public void WordTest(){
         String contents = "eph";
-        Cipher cipher = new Cipher();
+        Cipher cipher = new Cipher("wordtestkey.txt");
         contents = cipher.decipher(contents);
         assertEquals("dog", contents);
     }
@@ -14,7 +14,7 @@ public class CipherTest {
     @Test
     public void SentenceTest(){
         String contents = "ifmmp xpsme";
-        Cipher cipher = new Cipher();
+        Cipher cipher = new Cipher("sentencetestkey.txt");
         contents = cipher.decipher(contents);
         assertEquals("hello world", contents);
     }
@@ -22,7 +22,7 @@ public class CipherTest {
     @Test
     public void PunctuationTest(){
         String contents = "ifmmp, xpsme!";
-        Cipher cipher = new Cipher();
+        Cipher cipher = new Cipher("punctestkey.txt");
         contents = cipher.decipher(contents);
         assertEquals("hello, world!", contents);
     }
@@ -30,7 +30,7 @@ public class CipherTest {
     @Test
     public void CapitalizationTest(){
         String contents = "Eph";
-        Cipher cipher = new Cipher();
+        Cipher cipher = new Cipher("capitalizationtestkey.txt");
         contents = cipher.decipher(contents);
         assertEquals("Dog", contents);
     }

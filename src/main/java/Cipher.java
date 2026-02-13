@@ -4,8 +4,15 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Cipher {
+    private File keyfile;
+    public Cipher() {
+        keyfile = new File("ciphers/key.txt");
+    }
+
+    public Cipher(String key) {
+        keyfile = new File("ciphers/" + key);
+    }
     public String decipher(String text) {
-        File keyfile = new File("ciphers/key.txt");
         String actualLine = "";
         String cipherLine = "";
         try (Scanner scanner = new Scanner(keyfile)) {

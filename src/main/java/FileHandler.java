@@ -28,7 +28,11 @@ public class FileHandler {
         try(Scanner scanner = new Scanner(currentFile)) {
             while (scanner.hasNextLine()) { //reads the file contents line by line
                 String line = scanner.nextLine();
-                fc += (line + "\n"); //concatenates the file contents to a string
+                if (scanner.hasNextLine()) {
+                    fc += (line + "\n"); //concatenates the file contents to a string
+                } else {
+                    fc += line;
+                }
             }
             fileContents = fc;
             return fc;

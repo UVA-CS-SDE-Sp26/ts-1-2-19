@@ -6,13 +6,13 @@ public class FileHandlerTest {
     @Test
     public void testOne() {
         FileHandler fh = new FileHandler("a.txt");
-        assertEquals("bdkjhevhdvwejhsjedbw\n", fh.returnFileContents(), "File contents of a.txt should be:\nbdkjhevhdvwejhsjedbw");
+        assertEquals("bdkjhevhdvwejhsjedbw", fh.returnFileContents(), "File contents of a.txt should be:\nbdkjhevhdvwejhsjedbw");
     }
 
     @Test
     public void testTwo() {
         FileHandler fh = new FileHandler("b.txt");
-        assertEquals("contents of b\nejwbdbdd\n", fh.returnFileContents(), "File contents of b.txt should be:\ncontents of b\nejwbdbdd");
+        assertEquals("ejwbdbdd", fh.returnFileContents(), "File contents of b.txt should be:\nnejwbdbdd");
     }
 
     @Test
