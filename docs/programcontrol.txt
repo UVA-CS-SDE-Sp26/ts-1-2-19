@@ -28,6 +28,7 @@ Case 2a) 1 Argument -- index not within 00-100/is not a number: Should throw an 
         4) java TopSecret 00a
         5) java TopSecret 0
         6) java TopSecret -1
+        7) java TopSecret $%
     Test outputs:
         - The result of 1) should depend on whether there is a file indexed to 100. In our case, we do not have an 100\
         file, so the expected result should be an error saying "index does not match existing file". This is used to ensure\
@@ -48,4 +49,10 @@ Case 3) 2 Arguments: checks if cipher is working correctly
         1) java TopSecret 00 0
         2) java TopSecret 00 1
     Test Outputs:
-        -
+        - 1) Should return the same thing since the argument is 0
+        - 2) Should return the contents shifted one letter off
+Case 3a) 2 Arguments -- non-numerical: checks if program throws an error when letters or symbols are the input
+    Test inputs:
+        1) java TopSecret 00 a
+    Test  outputs:
+        - Should return some kind of error message.
