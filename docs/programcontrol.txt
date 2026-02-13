@@ -16,8 +16,7 @@ Case 2) 1 Argument: Should output contents of specified file name.
     Test inputs:
         1) java TopSecret 00
         2) java TopSecret 01
-        3) java TopSecret 02
-        4) jave TopSecret 10
+        3) jave TopSecret 10
     Test outputs:
         - The contents of each respective file. The files are ranked alphabetically \
         and numerically so the index/number assigned corresponds to position in the folder.

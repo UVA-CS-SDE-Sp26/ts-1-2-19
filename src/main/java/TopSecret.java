@@ -63,8 +63,6 @@ public class TopSecret {
                 System.out.println("Some error in accessing files.");
                 return;
             }
-            //At some point, the folders went out of alphabetical order, for ease of testing, I am sorting them now.
-            files.sort(String::compareTo);
             //assigns an int to each file in the folder based on the argument in position one, which is the number
             int index = Integer.parseInt(args[0]);
             try {
