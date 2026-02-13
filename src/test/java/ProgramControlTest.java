@@ -26,7 +26,7 @@ public class ProgramControlTest {
         System.setOut(new PrintStream(outContent));
 
         // ensure key.txt exists for decipher tests (you can overwrite per-test)
-        Files.writeString(keyFile, "abc\nabc\n");
+        //Files.writeString(keyFile, "abc\nabc\n");
     }
     @AfterEach
     void teardown() throws IOException {
@@ -52,7 +52,7 @@ public class ProgramControlTest {
         TopSecret.accessFiles(new String[]{"09"});
         String actual = outContent.toString().replaceAll("\\R", "\n").trim();
         String expected = ("Reading j.txt with cipherKey of key.txt:\n" +
-                "index at 00").replaceAll("\\R", "\n").trim();
+                "hmcdw 0s 99").replaceAll("\\R", "\n").trim();
         assertEquals(expected, actual);
     }
     @Test
@@ -60,7 +60,7 @@ public class ProgramControlTest {
         TopSecret.accessFiles(new String[]{"10"});
         String actual = outContent.toString().replaceAll("\\R", "\n").trim();
         String expected = ("Reading k.txt with cipherKey of key.txt:\n" +
-                "index at 01").replaceAll("\\R", "\n").trim();
+                "hmcdw 0s 9Z").replaceAll("\\R", "\n").trim();
         assertEquals(expected, actual);
     }
     @Test
@@ -68,7 +68,7 @@ public class ProgramControlTest {
         TopSecret.accessFiles(new String[]{"6"});
         String actual = outContent.toString().replaceAll("\\R", "\n").trim();
         String expected = ("Reading g.txt with cipherKey of key.txt:\n" +
-                "This is content of g").replaceAll("\\R", "\n").trim();
+                "Sghr hr bnmsdms ne f").replaceAll("\\R", "\n").trim();
         assertEquals(expected, actual);
     }
     @Test
@@ -124,7 +124,7 @@ public class ProgramControlTest {
         TopSecret.accessFiles(new String[]{"6"});
         String actual = outContent.toString().replaceAll("\\R", "\n").trim();
         String expected = ("Reading g.txt with cipherKey of key.txt:\n" +
-                "This is content of g").replaceAll("\\R", "\n").trim();
+                "Sghr hr bnmsdms ne f").replaceAll("\\R", "\n").trim();
         assertEquals(expected, actual);
     }
 
@@ -146,8 +146,8 @@ public class ProgramControlTest {
     public void Testfifteen_Two_Args_a() {
         TopSecret.accessFiles(new String[]{"00", "0"});
         String actual = outContent.toString().replaceAll("\\R", "\n").trim();
-        String expected = ("Reading a.txt with cipherKey of capitalizationtestkey.txt:\n" +
-                "bdkjgevgdvwejgsjedbw").replaceAll("\\R", "\n").trim();
+        String expected = ("Reading a.txt with cipherKey of key.txt:\n" +
+                "acjigdugcuvdigridcav").replaceAll("\\R", "\n").trim();
         assertEquals(expected, actual);
 
     }
@@ -156,8 +156,8 @@ public class ProgramControlTest {
     public void Testsixteen_Two_Args_b() {      //FAILED
         TopSecret.accessFiles(new String[]{"00", "1"});
         String actual = outContent.toString().replaceAll("\\R", "\n").trim();
-        String expected = ("Reading a.txt with cipherKey of key.txt:\n" +
-                "bdkjhevhdvwejhsjedbw").replaceAll("\\R", "\n").trim();
+        String expected = ("Reading a.txt with cipherKey of key2test.txt:\n" +
+                "0bihfctfbtuchfuhcb0u").replaceAll("\\R", "\n").trim();
         assertEquals(expected, actual);
     }
 
