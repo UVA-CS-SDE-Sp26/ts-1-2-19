@@ -3,6 +3,32 @@ Documentation for the File Handler
 This program will receive requests to read files. Once a request is received, the program will read the file and return the file contents.
 If the file cannot be accessed, an error will be printed and the function will return the empty string.
 
-TopSecret
------------
-+returnFileContents(String filename): String
+
+UML Diagram
+
+FileHandler
+------------
+-fileName: String
+-fileContents: String
+------------
++getFileName(): String
++getFileContents(): String
++setFileName(String fileName): void
++returnFileContents(): String
+
+
+Tests for returnFileContents():
+
+Test 1:
+Create new FileHandler object with fileName = "a.txt"
+Expected output: bdkjhevhdvwejhsjedbw
+
+Test 2:
+Create new FileHandler object with fileName = "b.txt"
+Expected output: contents of b
+                 ejwbdbdd
+
+Test 3:
+Create new FileHandler object with fileName = "z.txt"
+Expected output:
+(Blank output: empty string)
