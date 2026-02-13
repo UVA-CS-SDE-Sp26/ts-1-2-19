@@ -1,5 +1,3 @@
-//did part of #3, trying to get gradle to work before I work on the final half. 
-
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;

@@ -44,4 +44,8 @@ Case 2b) 1 Argument -- index does not match a file: Should throw an error
         - 2), 3) should throw an error saying "index does not match existing file"
 
 Case 3) 2 Arguments: checks if cipher is working correctly
-//... insert cipher logic here when done.
+    Test inputs:
+        1) java TopSecret 00 0
+        2) java TopSecret 00 1
+    Test Outputs:
+        -

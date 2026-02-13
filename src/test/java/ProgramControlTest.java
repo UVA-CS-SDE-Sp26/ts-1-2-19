@@ -83,8 +83,54 @@ public class ProgramControlTest {
         assertTrue(output.contains("This algorithm only takes numbers 00-100."));
     }
 
+    @Test
+    public void Testseven_One_Args_c() {
+        TopSecret.accessFiles(new String[]{"ab"});
+        String output = outContent.toString();
+        assertTrue(output.contains("This algorithm only takes numbers 00-100."));
+    }
 
+    @Test
+    public void Testeight_One_Args_d() {
+        TopSecret.accessFiles(new String[]{"00a"});
+        String output = outContent.toString();
+        assertTrue(output.contains("This algorithm only takes numbers 00-100."));
+    }
 
+    @Test
+    public void Testnine_One_Args_e() {
+        TopSecret.accessFiles(new String[]{"0"});
+        String output = outContent.toString();
+        assertTrue(output.contains("This algorithm only takes numbers 00-100."));
+    }
 
+    @Test
+    public void Testten_One_Args_f() {
+        TopSecret.accessFiles(new String[]{"-1"});
+        String output = outContent.toString();
+        assertTrue(output.contains("This algorithm only takes numbers 00-100."));
+    }
+
+    @Test
+    public void Testeleven_One_Args_a() {
+        TopSecret.accessFiles(new String[]{"10"});
+        String output = outContent.toString();
+        assertEquals("Reading g.txt with cipherKey of 0:\n" +
+                "This is content of g", outContent.toString().trim());
+    }
+
+    @Test
+    public void Testtwelve_One_Args_b() {
+        TopSecret.accessFiles(new String[]{"11"});
+        String output = outContent.toString();
+        assertTrue(output.contains("Error: Index does not match an existing file. Try a different number."));
+    }
+
+    @Test
+    public void Testthirteen_One_Args_c() {
+        TopSecret.accessFiles(new String[]{"50"});
+        String output = outContent.toString();
+        assertTrue(output.contains("Error: Index does not match an existing file. Try a different number."));
+    }
 
 }
